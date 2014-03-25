@@ -18,13 +18,13 @@ have also been included.
 //The song "Victory Fanfare" was taken from the game
 //"Final Fantasy 7" by Square-Enix.
 import ddf.minim.*;
-Minim minim;
-AudioPlayer song;
 
 //Creating the major class instances.
 Square mainSquare = new Square();
 Background usualB = new Background();
 Movement sMovement = new Movement();
+Minim minim;
+Audio music = new Audio();
 
 //Stages
 boolean mainMenu = true;
@@ -40,9 +40,7 @@ void setup() {
   size(1200, 900);
   background(237);
   minim = new Minim(this);
-  song = minim.loadFile("Hane.mp3");
-  song.play();
-  song.loop();
+  music.playHane();
   Win = loadImage("Win.jpg");
 }
 
@@ -117,10 +115,7 @@ void draw() {
     text("Blend in with the background. Be one with your inner chameleon...", width/2, height/2+360);
 
     if (redness >= 0 && redness <= 25 && blueness >= 180 && blueness <= 220) {
-      song.pause();
-      song = minim.loadFile("Victory Fanfare.mp3");
-      song.play();
-      song.loop();
+      music.playVictoryFanfare();
       ending = true;
       stage2 = false;
     }
@@ -132,10 +127,7 @@ void draw() {
     fill(0);
     text("Press 'R' to do it all again.", width/2, height/2+410);
     if (keyCode == 'R') {
-      song.pause();
-      song = minim.loadFile("Hane.mp3");
-      song.play();
-      song.loop();
+      music.playHane();
       mainSquare.returnToStart();
       ending = false;
       mainMenu = true;
