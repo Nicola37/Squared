@@ -2,7 +2,7 @@ class Square {
   int s;
   color sColor;
   float xPos = 100;
-  float yPos = 670;
+  float yPos = 675;
   float footx1 = xPos - s/2;
   float footy1 = yPos + s/2;
   float footx2 = xPos + s/2;
@@ -10,14 +10,20 @@ class Square {
   double speedx = 3.37;
   double speedy = 0;
   boolean collided = false;
+  boolean enemyS;
+  boolean died;
 
   Square() {
     s = 50;
     sColor = color(0, 0, 200);
+    enemyS = false;
   }
-  Square(int s, color sColor) {
+  Square(int s, color sColor, float xPos, float yPos) {
     this.s = s;
     this.sColor = sColor;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    enemyS = true;
   }
 
   void displayS() {
@@ -25,13 +31,23 @@ class Square {
     if (!collided) {
       gravity();
     }
-
+    died = false;
     //Moving the Square
-    if (sMovement.right) {
+    if (sMovement.right && enemyS == false) {
       xPos += speedx;
+      xPos = constrain(xPos, 0, 1200);
     }
-    if (sMovement.left) {
+    if (sMovement.left && enemyS == false) {
       xPos -= speedx;
+      xPos = constrain(xPos, 0, 1200);
+    }
+    if (sMovement.right && enemyS == true) {
+      xPos -= speedx;
+      xPos = constrain(xPos, 0, 1200);
+    }
+    if (sMovement.left && enemyS == true) {
+      xPos += speedx;
+      xPos = constrain(xPos, 0, 1200);
     }
     if (sMovement.up && collided) {
       speedy -= 10;
@@ -41,8 +57,7 @@ class Square {
 
     //Sends you back to the start if you touch spikes.
     if (yPos > 700 || ((xPos > 520) && (xPos < 770) && (yPos > 400) && (yPos < 440))) {
-      xPos = 100;
-      yPos = 670;
+      returnToStart();
     }
 
     //Collision points.
@@ -63,7 +78,7 @@ class Square {
     rectMode(CENTER);
     fill(sColor);
     rect(xPos, yPos, s, s);
-    
+
     //Uncomment to see collision detection points.
     //fill(0, 255, 0);
     //ellipse(footx1, footy1, 5, 5);
@@ -105,11 +120,18 @@ class Square {
       return false;
     }
   }
-  
+
   //Send you back to the spawn point.
   void returnToStart() {
-    xPos = 100;
-    yPos = 670;
+    if (enemyS == false) {
+      xPos = 100;
+      yPos = 675;
+    }
+    if (enemyS == true){
+      xPos = 1100;
+      yPos = 675;
+    }
+    died = true;
   }
 }
 
