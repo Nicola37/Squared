@@ -16,7 +16,7 @@ import ddf.minim.*;
 //Creating the major class instances.
 Square mainSquare = new Square();
 Square enemy = new Square(50, color(200, 0, 0), 1100, 670);
-Background usualB = new Background();
+Background usualB = new Background(237, color(15, 255));
 Movement sMovement = new Movement();
 Minim minim;
 Audio music = new Audio();
@@ -27,6 +27,7 @@ boolean mainMenu = true;
 boolean stage1 = false;
 boolean stage2 = false;
 boolean stage3 = false;
+boolean stage4 = false;
 boolean ending = false;
 
 //Winning image, fading in,etc.
@@ -57,22 +58,24 @@ void draw() {
   //For testing purposes, you can skip to a certain stage if you uncomment this.
   /*if (keyCode == '1') {
     stage1 = true;
-    stage2 = false;
-    stage3 = false;
+    stage2 = stage3 = stage4 = false;
     mainSquare.returnToStart();
   }
   else if (keyCode == '2') {
-    stage1 = false;
     stage2 = true;
-    stage3 = false;
+    stage1 = stage3 = stage4 = false;
     mainSquare.returnToStart();
   }
   else if (keyCode == '3') {
-    stage1 = false;
-    stage2 = false;
     stage3 = true; 
+    stage1 = stage2 = stage4 = false;
     mainSquare.returnToStart();
     enemy.returnToStart();
+  }
+  else if (keyCode == '4') {
+    stage4 = true;
+    stage1 = stage2 = stage3 = false; 
+    mainSquare.returnToStart();
   }*/
 
   if (mainMenu) {
@@ -86,6 +89,9 @@ void draw() {
   }
   else if (stage3) {
     level.stage3();
+  }
+  else if (stage4) {
+    level.stage4();
   }
   //A winner is you.
   else if (ending) {

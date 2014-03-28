@@ -45,7 +45,7 @@ class Stages {
     float blueness = map(mainSquare.xPos, 0, 900, 0, 255)+50;
     float greenness = map(mainSquare.xPos/mainSquare.yPos, 0, 1200, 0, 255)+20;
     background(redness, greenness, blueness);
-    Background stage2B = new Background(color(redness, greenness, blueness));
+    Background stage2B = new Background(color(redness, greenness, blueness), color(15, 15, 15));
     stage2B.displayB();
     mainSquare.displayS();
 
@@ -77,10 +77,27 @@ class Stages {
     }
     if (mainSquare.goalReached()) {
       stage3 = false;
+      stage4 = true;
+      mainSquare.returnToStart();
+      enemy.returnToStart();
+    }
+  }
+
+  void stage4() {
+    background(237);
+    usualB.displayB();
+    mainSquare.displayS();
+    if (mainSquare.xPos <= 700) {
+      usualB.pColor = color(15, int(map(mainSquare.xPos, 475, 700, 0, 255)));
+    }
+    else if (mainSquare.xPos > 700) {
+      usualB.pColor = color(15, int(map(mainSquare.xPos, 700, 950, 255, 0)));
+    }
+    if (mainSquare.goalReached()) {
+      stage4 = false;
       ending = true;
       music.playVictoryFanfare();
       mainSquare.returnToStart();
-      enemy.returnToStart();
     }
   }
 

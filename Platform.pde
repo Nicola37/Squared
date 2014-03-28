@@ -2,8 +2,8 @@ class Platform{
    color pColor;
    int x, y, w, h;
   
-  Platform(int x, int y, int w, int h){
-    pColor = color(15, 15, 15);
+  Platform(int x, int y, int w, int h, color pColor){
+    this.pColor = pColor;
     this.x = x;
     this.y = y;
     this.w = w;

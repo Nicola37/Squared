@@ -1,5 +1,5 @@
 class Square {
-  int s;
+  float s;
   color sColor;
   float xPos = 100;
   float yPos = 675;
@@ -7,7 +7,7 @@ class Square {
   float footy1 = yPos + s/2;
   float footx2 = xPos + s/2;
   float footy2 = yPos + s/2;
-  double speedx = 3.37;
+  double speedx = 3.5;
   double speedy = 0;
   boolean collided = false;
   boolean enemyS;
@@ -18,7 +18,7 @@ class Square {
     sColor = color(0, 0, 200);
     enemyS = false;
   }
-  Square(int s, color sColor, float xPos, float yPos) {
+  Square(float s, color sColor, float xPos, float yPos) {
     this.s = s;
     this.sColor = sColor;
     this.xPos = xPos;
