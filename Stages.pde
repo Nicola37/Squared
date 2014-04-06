@@ -5,7 +5,8 @@ class Stages {
 
     if (fadeIn < 255) {
       fadeIn += 1.3;
-    }
+    }   
+
     rectMode(CENTER);
     noStroke();
     fill(0, 0, 200, fadeIn);
@@ -19,6 +20,7 @@ class Stages {
     if (keyPressed) {
       mainMenu = false;
       stage1 = true;
+      music.playJam();
     }
   }
 
@@ -96,7 +98,7 @@ class Stages {
     if (mainSquare.goalReached()) {
       stage4 = false;
       ending = true;
-      music.playVictoryFanfare();
+      music.playGarcon();
       mainSquare.returnToStart();
     }
   }
@@ -107,7 +109,7 @@ class Stages {
     fill(0);
     text("Press 'R' to do it all again.", width/2, height/2+410);
     if (keyCode == 'R') {
-      music.playHane();
+      music.playaaf();
       mainSquare.returnToStart();
       ending = false;
       mainMenu = true;

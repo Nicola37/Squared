@@ -6,12 +6,9 @@
  In progress...
  */
 
-//Music
-//The song "Hane" was taken from the game
-//"Umineko no Naku Koro ni" by 7th Expansion.
-//The song "Victory Fanfare" was taken from the game
-//"Final Fantasy 7" by Square-Enix.
+//Music taken from the Free Music Archive.
 import ddf.minim.*;
+import processing.video.*;
 
 //Creating the major class instances.
 Square mainSquare = new Square();
@@ -21,6 +18,9 @@ Movement sMovement = new Movement();
 Minim minim;
 Audio music = new Audio();
 Stages level = new Stages();
+
+//Movie Stuff
+Movie movie1;
 
 //Stages
 boolean mainMenu = true;
@@ -39,8 +39,12 @@ void setup() {
   size(1200, 900);
   background(237);
   minim = new Minim(this);
-  music.playHane();
+  music.playaaf();
   Win = loadImage("Win.jpg");
+
+  imageMode(CENTER);
+  movie1 = new Movie(this, "movie1.mov");
+  movie1.play();
 }
 
 void keyPressed() {
@@ -57,29 +61,35 @@ void keyReleased() {
 void draw() {
   //For testing purposes, you can skip to a certain stage if you uncomment this.
   /*if (keyCode == '1') {
-    stage1 = true;
-    stage2 = stage3 = stage4 = false;
-    mainSquare.returnToStart();
+   stage1 = true;
+   stage2 = stage3 = stage4 = false;
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '2') {
+   stage2 = true;
+   stage1 = stage3 = stage4 = false;
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '3') {
+   stage3 = true; 
+   stage1 = stage2 = stage4 = false;
+   mainSquare.returnToStart();
+   enemy.returnToStart();
+   }
+   else if (keyCode == '4') {
+   stage4 = true;
+   stage1 = stage2 = stage3 = false; 
+   mainSquare.returnToStart();
+   }*/
+
+  if (mousePressed) {
+    saveFrame("movie1####.png");
   }
-  else if (keyCode == '2') {
-    stage2 = true;
-    stage1 = stage3 = stage4 = false;
-    mainSquare.returnToStart();
-  }
-  else if (keyCode == '3') {
-    stage3 = true; 
-    stage1 = stage2 = stage4 = false;
-    mainSquare.returnToStart();
-    enemy.returnToStart();
-  }
-  else if (keyCode == '4') {
-    stage4 = true;
-    stage1 = stage2 = stage3 = false; 
-    mainSquare.returnToStart();
-  }*/
 
   if (mainMenu) {
     level.mainMenu();
+    movie1.play();
+    image(movie1, 0, 0, 500, 350);
   }
   else if (stage1) {
     level.stage1();
