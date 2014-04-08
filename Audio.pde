@@ -29,5 +29,23 @@ class Audio {
     song.play();
     song.loop();
   }
+  
+  void play9000() {
+    if (song != null) {
+      song.pause();
+    }
+    song = minim.loadFile("9000.mp3");
+    song.play();
+    song.loop();
+  }
+  
+  void pause(){
+    song.pause();
+  }
+  
+  void cont(){
+    song.play();
+    song.loop();
+  }
 }
 

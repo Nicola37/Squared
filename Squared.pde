@@ -20,7 +20,7 @@ Audio music = new Audio();
 Stages level = new Stages();
 
 //Movie Stuff
-Movie movie1;
+Movie movie1, movie2, movie3, movie9000, movie9001;
 
 //Stages
 boolean mainMenu = true;
@@ -33,6 +33,8 @@ boolean ending = false;
 //Winning image, fading in,etc.
 PImage Win;
 float fadeIn = 0;
+float fadeOut = 255;
+float rand = random(9100);
 float x;
 
 void setup() {
@@ -44,7 +46,10 @@ void setup() {
 
   imageMode(CENTER);
   movie1 = new Movie(this, "movie1.mov");
-  movie1.play();
+  movie2 = new Movie(this, "movie2.mov");
+  movie3 = new Movie(this, "movie3.mov");
+  movie9000 = new Movie(this, "movie9000.mp4");
+  movie9001 = new Movie(this, "movie9000.mov");
 }
 
 void keyPressed() {
@@ -83,13 +88,11 @@ void draw() {
    }*/
 
   if (mousePressed) {
-    saveFrame("movie1####.png");
+    saveFrame("movie####.png");
   }
 
   if (mainMenu) {
     level.mainMenu();
-    movie1.play();
-    image(movie1, 0, 0, 500, 350);
   }
   else if (stage1) {
     level.stage1();
@@ -107,5 +110,9 @@ void draw() {
   else if (ending) {
     level.ending();
   }
+}
+
+void movieEvent(Movie m) {
+  m.read();
 }
 

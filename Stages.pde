@@ -1,10 +1,13 @@
 class Stages {
-
+  
   void mainMenu() {
+    println(rand);
+    imageMode(CENTER);
+    
     background(255);
 
     if (fadeIn < 255) {
-      fadeIn += 1.3;
+      fadeIn += 1.5;
     }   
 
     rectMode(CENTER);
@@ -16,7 +19,97 @@ class Stages {
     textSize(30);
     textAlign(CENTER);
     text("Press any key to begin.", width/2, height/2+200);
-    text("2", 800, 130);
+    if (rand > 9000){
+      text("9000", 800, 110);
+    }
+    else{
+      text("2", 800, 110);
+    }
+
+    //Please pardon the long, not so pretty movie code.
+    //If for some reason things do not run, comment out the movie code.
+    //It's still being kind of odd when its power level is too high.
+    if (rand <= 3000) {
+      if (fadeIn >= 250 && fadeOut == 255) {
+        noTint();
+        movie1.play();
+        image(movie1, width/2, height/2 - 150);
+      }
+
+      if (movie1.time() % movie1.duration() == 0) {
+        tint(255, fadeOut);
+        image(movie1, width/2, height/2 - 150);
+        fadeOut -= 0.9;
+      }
+
+      if (fadeOut <= 0) {
+        movie1.stop();
+        fadeOut = 255;
+        rand = random(9037);
+      }
+    }
+    else if (rand > 3000 && rand <= 6000) {
+      if (fadeIn >= 250 && fadeOut == 255) {
+        noTint();
+        movie2.play();
+        image(movie2, width/2, height/2 - 150);
+      }
+
+      if (movie2.time() % movie2.duration() == 0) {
+        tint(255, fadeOut);
+        image(movie2, width/2, height/2 - 150);
+        fadeOut -= 0.9;
+      }
+
+      if (fadeOut <= 0) {
+        movie2.stop();
+        fadeOut = 255;
+        rand = random(9037);
+      }
+    }
+    else if (rand > 6000 && rand <= 9000) {
+      if (fadeIn >= 250 && fadeOut == 255) {
+        noTint();
+        movie3.play();
+        image(movie3, width/2, height/2 - 150);
+      }
+
+      if (movie3.time() >= movie3.duration()) {
+        tint(255, fadeOut);
+        image(movie3, width/2, height/2 - 150);
+        fadeOut -= 0.9;
+      }
+
+      if (fadeOut <= 0) {
+        movie3.stop();
+        fadeOut = 255;
+        rand = random(9037);
+      }
+    }
+    else if (rand > 9000) {
+      music.pause();
+      if (fadeIn >= 250 && fadeOut == 255) {
+        noTint();
+        movie9000.play();
+        movie9001.play();
+        image(movie9000, width/2, height/2 - 150, 500, 350);
+      }
+
+      if (movie9001.time() >= movie9001.duration()) {
+        tint(255, fadeOut);
+        image(movie9001, width/2, height/2 - 150, 500, 350);
+        fadeOut -= 0.9;
+      }
+
+      if (fadeOut <= 0) {
+        movie9000.stop();
+        movie9001.stop();
+        fadeOut = 255;
+        rand = random(9037);
+        music.cont();
+      }
+    }
+
     if (keyPressed) {
       mainMenu = false;
       stage1 = true;
@@ -104,6 +197,7 @@ class Stages {
   }
 
   void ending() {
+    imageMode(CORNER);
     image(Win, 0, 0, Win.width*3, Win.height*2.5);
 
     fill(0);
