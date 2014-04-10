@@ -1,9 +1,8 @@
 class Stages {
-  
+
   void mainMenu() {
-    println(rand);
     imageMode(CENTER);
-    
+
     background(255);
 
     if (fadeIn < 255) {
@@ -18,99 +17,20 @@ class Stages {
     fill(0);
     textSize(30);
     textAlign(CENTER);
-    text("Press any key to begin.", width/2, height/2+200);
-    if (rand > 9000){
+    text("Press enter to begin.", width/2, height/2+200);
+    if (rand > 9000) {
       text("9000", 800, 110);
     }
-    else{
+    else {
       text("2", 800, 110);
     }
 
     //Please pardon the long, not so pretty movie code.
     //If for some reason things do not run, comment out the movie code.
     //It's still being kind of odd when its power level is too high.
-    if (rand <= 3000) {
-      if (fadeIn >= 250 && fadeOut == 255) {
-        noTint();
-        movie1.play();
-        image(movie1, width/2, height/2 - 150);
-      }
+    gameplay.playRandom();
 
-      if (movie1.time() % movie1.duration() == 0) {
-        tint(255, fadeOut);
-        image(movie1, width/2, height/2 - 150);
-        fadeOut -= 0.9;
-      }
-
-      if (fadeOut <= 0) {
-        movie1.stop();
-        fadeOut = 255;
-        rand = random(9037);
-      }
-    }
-    else if (rand > 3000 && rand <= 6000) {
-      if (fadeIn >= 250 && fadeOut == 255) {
-        noTint();
-        movie2.play();
-        image(movie2, width/2, height/2 - 150);
-      }
-
-      if (movie2.time() % movie2.duration() == 0) {
-        tint(255, fadeOut);
-        image(movie2, width/2, height/2 - 150);
-        fadeOut -= 0.9;
-      }
-
-      if (fadeOut <= 0) {
-        movie2.stop();
-        fadeOut = 255;
-        rand = random(9037);
-      }
-    }
-    else if (rand > 6000 && rand <= 9000) {
-      if (fadeIn >= 250 && fadeOut == 255) {
-        noTint();
-        movie3.play();
-        image(movie3, width/2, height/2 - 150);
-      }
-
-      if (movie3.time() >= movie3.duration()) {
-        tint(255, fadeOut);
-        image(movie3, width/2, height/2 - 150);
-        fadeOut -= 0.9;
-      }
-
-      if (fadeOut <= 0) {
-        movie3.stop();
-        fadeOut = 255;
-        rand = random(9037);
-      }
-    }
-    else if (rand > 9000) {
-      music.pause();
-      if (fadeIn >= 250 && fadeOut == 255) {
-        noTint();
-        movie9000.play();
-        movie9001.play();
-        image(movie9000, width/2, height/2 - 150, 500, 350);
-      }
-
-      if (movie9001.time() >= movie9001.duration()) {
-        tint(255, fadeOut);
-        image(movie9001, width/2, height/2 - 150, 500, 350);
-        fadeOut -= 0.9;
-      }
-
-      if (fadeOut <= 0) {
-        movie9000.stop();
-        movie9001.stop();
-        fadeOut = 255;
-        rand = random(9037);
-        music.cont();
-      }
-    }
-
-    if (keyPressed) {
+    if (keyCode == ENTER) {
       mainMenu = false;
       stage1 = true;
       music.playJam();
@@ -121,12 +41,13 @@ class Stages {
     background(237);
     usualB.displayB();
     mainSquare.displayS();
-    fill(255);
 
-    textSize(30);
-    text("Witty dialogue not yet available. Please try again later.", width/2, height/2+350);
+    textAlign(LEFT);
+    fill(0);
     textSize(20);
-    text("Getting to the goal would be a good idea, though. You do have those pretty arrow keys, after all.", width/2, height/2+380);
+    text("Hello, dear player. I am but a humble square. Being such a simple shape,", width/2-350, height/2+330);
+    text("my job is easy. I just have to go through this uninteresting level over and over.", width/2-350, height/2+370);
+    text("I like to imagine that I move thanks to arrows made of keys... Ha, like that's actually a thing.", width/2-350, height/2+410);
 
     if (mainSquare.goalReached()) {
       stage1 = false;
@@ -144,9 +65,11 @@ class Stages {
     stage2B.displayB();
     mainSquare.displayS();
 
-    fill(255);
-    textSize(30);
-    text("Blend in with the background. Be one with your inner chameleon...", width/2, height/2+360);
+    fill(0);
+    textSize(20);
+    text("Oh? You thought I did the EXACT same thing each time? Pfft, that'd be boring.", width/2-350, height/2+330);
+    text("Sometimes, it can be fun to blend in with the scenery,", width/2-350, height/2+370);
+    text("which isn't too hard to do when you're just one color...", width/2-350, height/2+410);
 
     if (redness >= 0 && redness <= 25 && blueness >= 180 && blueness <= 220) {
       mainSquare.returnToStart();
@@ -170,6 +93,24 @@ class Stages {
     if (mainSquare.died) {
       enemy.returnToStart();
     }
+
+    fill(map(abs(sin(x)), 0, 1, 30, 230), 0, 0);
+    rectMode(CORNER);
+    rect(79, 760, 90, 90);
+    fill(0);
+    textSize(35);
+    text("I AM YOU MORTAL ENEMY!", width/2-350, height/2+340);
+    text("MWAHAHAHAHAHA!!", width/2-350, height/2+395);
+    fill(15);
+    rect(800, 700, 5, 500);
+    fill(0, 0, 200);
+    rect(970, 760, 30, 30);
+    fill(0);
+    textSize(15);
+    text("Wow, even my mortal enemy is cliché.", 860, 820);
+    text("Well, at least he glows. That's kinda cool, I guess.", 810, 835);
+
+
     if (mainSquare.goalReached()) {
       stage3 = false;
       stage4 = true;
@@ -188,7 +129,15 @@ class Stages {
     else if (mainSquare.xPos > 700) {
       usualB.pColor = color(15, int(map(mainSquare.xPos, 700, 950, 255, 0)));
     }
+
+    fill(0);
+    textSize(20);
+    text("So... is my eyesight getting worse, or is the floor invisible?", width/2-350, height/2+330);
+    fill(usualB.pColor);
+    text("Ohhhh, I get it now.", width/2-350, height/2+370);
+
     if (mainSquare.goalReached()) {
+      usualB.pColor = color(15, 255);
       stage4 = false;
       ending = true;
       music.playGarcon();
@@ -200,7 +149,9 @@ class Stages {
     imageMode(CORNER);
     image(Win, 0, 0, Win.width*3, Win.height*2.5);
 
+    textAlign(CENTER);
     fill(0);
+    textSize(30);
     text("Press 'R' to do it all again.", width/2, height/2+410);
     if (keyCode == 'R') {
       music.playaaf();

@@ -38,6 +38,7 @@ class Background {
     p6 = new Platform(85, 250, 75, 30, pColor);
     p6.display();
 
+    //Spikes
     Spikes spike1 = new Spikes(300, 740, 305, 730, 310, 740, 30);
     spike1.displaySpikes();
     Spikes spike2 = new Spikes(520, 440, 525, 430, 530, 440, 30);
@@ -46,6 +47,14 @@ class Background {
     //Goal
     fill(0, 200, 0);
     rect(102, 175, 40, 75);
+    
+    //Dialogue box
+    fill(255);
+    rect(50, 730, 150, 150);
+    fill(0, 0, 200);
+    rect(79, 760, 90, 90);
+    fill(245);
+    rect(240, 750, 937, 125);
   }
 }
 

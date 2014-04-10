@@ -3,7 +3,9 @@
  CAP 3032
  Final Project - Iteration 3
  
- In progress...
+ Gameplay movies have been added to the title sceen. Two new levels have been added.
+ Music has been changed to be from the Free Music Archive, and is now more varied (pardon the large file size).
+ Somewhat instructional dialogue has now been added.
  */
 
 //Music taken from the Free Music Archive.
@@ -18,9 +20,10 @@ Movement sMovement = new Movement();
 Minim minim;
 Audio music = new Audio();
 Stages level = new Stages();
+TitleMovie gameplay = new TitleMovie();
 
 //Movie Stuff
-Movie movie1, movie2, movie3, movie9000, movie9001;
+Movie movie1, movie2, movie3, movie4, movie9000, movie9001;
 
 //Stages
 boolean mainMenu = true;
@@ -34,7 +37,7 @@ boolean ending = false;
 PImage Win;
 float fadeIn = 0;
 float fadeOut = 255;
-float rand = random(9100);
+float rand = random(9100); //for added fun, set this to 9001
 float x;
 
 void setup() {
@@ -48,9 +51,11 @@ void setup() {
   movie1 = new Movie(this, "movie1.mov");
   movie2 = new Movie(this, "movie2.mov");
   movie3 = new Movie(this, "movie3.mov");
+  movie4 = new Movie(this, "movie4.mov");
   movie9000 = new Movie(this, "movie9000.mp4");
   movie9001 = new Movie(this, "movie9000.mov");
 }
+
 
 void keyPressed() {
   sMovement.pressKey(key, keyCode);
@@ -85,11 +90,11 @@ void draw() {
    stage4 = true;
    stage1 = stage2 = stage3 = false; 
    mainSquare.returnToStart();
+   }
+   
+   if (mousePressed) {
+   saveFrame("movie####.png");
    }*/
-
-  if (mousePressed) {
-    saveFrame("movie####.png");
-  }
 
   if (mainMenu) {
     level.mainMenu();
