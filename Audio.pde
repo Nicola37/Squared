@@ -29,21 +29,30 @@ class Audio {
     song.play();
     song.loop();
   }
-  
-  void play9000() {
+
+  void playSquareAndEnjoy() {
     if (song != null) {
       song.pause();
     }
-    song = minim.loadFile("9000.mp3");
+    song = minim.loadFile("square and enjoy.mp3");
     song.play();
     song.loop();
   }
-  
-  void pause(){
+
+  void playCircleSquare() {
+    if (song != null) {
+      song.pause();
+    }
+    song = minim.loadFile("Circle square.mp3");
+    song.play();
+    song.loop();
+  }
+
+  void pause() {
     song.pause();
   }
-  
-  void cont(){
+
+  void cont() {
     song.play();
     song.loop();
   }

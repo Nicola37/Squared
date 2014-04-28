@@ -81,13 +81,15 @@ class Square {
 
     //Checking for each platform.
     collision(usualB.p1);
-    if (stage5 == false) {
-      collision(usualB.p2);
-      collision(usualB.p3);
+    if (!finalStage) {
+      if (!stage5) {
+        collision(usualB.p2);
+        collision(usualB.p3);
+      }
+      collision(usualB.p4);
+      collision(usualB.p5);
+      collision(usualB.p6);
     }
-    collision(usualB.p4);
-    collision(usualB.p5);
-    collision(usualB.p6);
 
     //Making the actual square.
     rectMode(CENTER);
@@ -108,10 +110,10 @@ class Square {
 
   void collision(Platform p) {
     //Exceptions for falling into pits.
-    if (footy1 > 600 && footx1 > 300 && footx1 < 450 && footx2 > 300 && footx2 < 450) {
+    if (footy1 > 600 && footx1 > 300 && footx1 < 450 && footx2 > 300 && footx2 < 450 && !finalStage) {
       collided = false;
     }
-    else if (footy1 < 500 && footx1 > 520 && footx1 < 670 && footx2 > 520 && footx2 < 670) {
+    else if (footy1 < 500 && footx1 > 520 && footx1 < 670 && footx2 > 520 && footx2 < 670 && !finalStage) {
       collided = false;
     }
     //Handles platform collision. Thank you to Joseph Murphy for the help.

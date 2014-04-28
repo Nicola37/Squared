@@ -153,7 +153,7 @@ class Stages {
     fill(0);
     textSize(20);
     text("The platforms are a lie, so what else could you use...?", width/2-350, height/2+330);
-    if (mainSquare.portal){
+    if (mainSquare.portal) {
       text("Now you're thinking with porta-- I mean spikes. Thinking with spikes.", width/2-350, height/2+370);
       textSize(12);
       text("Nope, no copyright infringement here. Whew, dodged a bullet there.", width/2-350, height/2+395);
@@ -161,20 +161,118 @@ class Stages {
 
     if (mainSquare.goalReached()) {
       stage5 = false;
+      finalStage = true;
+      music.playSquareAndEnjoy();
+      mainSquare.xPos = 600;
+      mainSquare.yPos = 675;
+    }
+  }
+
+  void finalStage() {
+    background(0);
+
+    if (flag1 == false && flag2 == false && flag3 == false) {
+      if (fadeIn1 < 255) {
+        fadeIn1 += 1.1;
+      }
+      if (fadeIn1 >= 255) {
+        fadeIn2 += 1.1;
+      }
+      if (fadeIn1 >= 255 && fadeIn2 >= 255) {
+        fadeIn3 += 1.1;
+      }
+      textSize(30);
+      textAlign(CENTER);
+      fill(fadeIn1);
+      text("The humble square now reaches the end of his adventure,", width/2, height/2-300);
+      fill(fadeIn2);
+      text("but time stops for no square.", width/2, height/2-150);  
+      fill(fadeIn3);
+      text("So he simply continues going through this endless level...", width/2, height/2);
+    }
+
+    if (mainSquare.xPos > 1100 && !flag1 && !flag2 && !flag3) {
+      mainSquare.xPos = 100;
+      flag1 = true;
+    }
+    else if (mainSquare.xPos > 1100 && !flag2 && !flag3) {
+      mainSquare.xPos = 100;
+      flag1 = false;
+      flag2 = true;
+    }
+    else if (mainSquare.xPos > 1100 && !flag3) {
+      mainSquare.xPos = 100;
+      flag2 = false;
+      flag3 = true;
+    }
+    if (flag1 && !flag2 && !flag3) {
+      fill(255);
+      textSize(25);
+      text("Nope. I'm not doing this anymore, omnipotent narrator person.", width/2, 750);
+      text("My whole life, I've just repeated this level over and over, and I'm tired of it.", width/2, 800);
+      text("I've always been screwed, or I guess you could say...", width/2, 850);
+    }
+    if (flag2 && !flag1 && !flag3) {
+      fill(255);
+      textSize(100);
+      text("Squared", width/2, 400);
+    }
+    if (flag3 && !flag1 && !flag2) {
+      background(map(mainSquare.xPos, 200, 1200, 0, 250));
+      fill(255);
+      textSize(30);
+      text("So now it's time to make it out of here...", width/2, 750);
+    }
+
+    mainSquare.displayS();
+
+    if (fadeIn1 >= 255 && fadeIn2 >= 255 && fadeIn3 >= 255) {
+      fadeIn1 = fadeIn2 = fadeIn3 = 0;
+      finalStage = false;
+      badEnd = true;
+      goodEnd = false;
       ending = true;
-      music.playGarcon();
       mainSquare.returnToStart();
+      music.playCircleSquare();
+    }
+
+    if (flag3 && mainSquare.xPos > 1100) {
+      fadeIn1 = fadeIn2 = fadeIn3 = 0;
+      flag1 = flag2 = flag3 = false;
+      finalStage = false;
+      goodEnd = true;
+      badEnd = false;
+      ending = true;
+      mainSquare.returnToStart();
+      music.playGarcon();
     }
   }
 
   void ending() {
-    imageMode(CORNER);
-    image(Win, 0, 0, Win.width*3, Win.height*2.5);
+    background(255);
+    if (badEnd) {
+      textSize(90);
+      fill(0, 200, 0);
+      text("Congratulations!!", width/2, 200);
+      fill(0);
+      textSize(70);
+      text("You have completed the game.", width/2, 350);
+      textSize(30);
+      text("The good ending is still out of your grasp, and the square continues on...", width/2, 550);
+      textSize(20);
+      text("Try doing something during that final narration. Maybe you can change things...", width/2, 600);
+      textSize(50);
+      text("Press 'R' to try again.", width/2, 800);
+    }
+    else if (goodEnd) {
+      imageMode(CORNER);
+      image(Win, 0, 0, Win.width*3, Win.height*2.5);
 
-    textAlign(CENTER);
-    fill(0);
-    textSize(30);
-    text("Press 'R' to do it all again.", width/2, height/2+410);
+      textAlign(CENTER);
+      fill(0);
+      textSize(30);
+      text("Press 'R' to do it all again.", width/2, height/2+410);
+    }
     if (keyCode == 'R') {
       music.playaaf();
       mainSquare.returnToStart();

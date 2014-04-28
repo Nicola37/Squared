@@ -28,7 +28,18 @@ boolean stage2 = false;
 boolean stage3 = false;
 boolean stage4 = false;
 boolean stage5 = false;
+boolean finalStage = false;
 boolean ending = false;
+
+//endings
+float fadeIn1 = 0;
+float fadeIn2 = 0;
+float fadeIn3 = 0;
+boolean badEnd = false;
+boolean flag1 = false;
+boolean flag2 = false;
+boolean flag3 = false;
+boolean goodEnd = false;
 
 //Winning image, fading in,etc.
 PImage Win;
@@ -93,6 +104,11 @@ void draw() {
     stage1 = stage2 = stage3 = stage4 = false; 
     mainSquare.returnToStart();
   }
+  else if (keyCode == '0') {
+    finalStage = true;
+    stage1 = stage2 = stage3 = stage4 = stage5 = false; 
+    mainSquare.returnToStart();
+  }
 
   if (mousePressed) {
     saveFrame("movie####.png");
@@ -115,6 +131,9 @@ void draw() {
   }
   else if (stage5) {
     level.stage5();
+  }
+  else if (finalStage) {
+    level.finalStage();
   }
   //A winner is you.
   else if (ending) {
