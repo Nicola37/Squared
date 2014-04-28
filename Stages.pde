@@ -99,7 +99,7 @@ class Stages {
     rect(79, 760, 90, 90);
     fill(0);
     textSize(35);
-    text("I AM YOU MORTAL ENEMY!", width/2-350, height/2+340);
+    text("I AM YOUR MORTAL ENEMY!", width/2-350, height/2+340);
     text("MWAHAHAHAHAHA!!", width/2-350, height/2+395);
     fill(15);
     rect(800, 700, 5, 500);
@@ -139,6 +139,28 @@ class Stages {
     if (mainSquare.goalReached()) {
       usualB.pColor = color(15, 255);
       stage4 = false;
+      stage5 = true;
+      mainSquare.returnToStart();
+      mainSquare.portal = false;
+    }
+  }
+
+  void stage5() {
+    background(237);
+    usualB.displayB();
+    mainSquare.displayS();
+
+    fill(0);
+    textSize(20);
+    text("The platforms are a lie, so what else could you use...?", width/2-350, height/2+330);
+    if (mainSquare.portal){
+      text("Now you're thinking with porta-- I mean spikes. Thinking with spikes.", width/2-350, height/2+370);
+      textSize(12);
+      text("Nope, no copyright infringement here. Whew, dodged a bullet there.", width/2-350, height/2+395);
+    }
+
+    if (mainSquare.goalReached()) {
+      stage5 = false;
       ending = true;
       music.playGarcon();
       mainSquare.returnToStart();

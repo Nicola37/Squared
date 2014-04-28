@@ -21,7 +21,7 @@ class TitleMovie {
       if (fadeOut <= 0) {
         movie1.stop();
         fadeOut = 255;
-        rand = random(9037);
+        rand = random(2500, 9037);
       }
     }
     else if (rand > 2500 && rand <= 5000) {
@@ -78,7 +78,7 @@ class TitleMovie {
       if (fadeOut <= 0) {
         movie4.stop();
         fadeOut = 255;
-        rand = random(9037);
+        rand = random(7500);
       }
     }
     else if (rand > 9000) {

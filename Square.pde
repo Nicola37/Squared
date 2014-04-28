@@ -12,6 +12,7 @@ class Square {
   boolean collided = false;
   boolean enemyS;
   boolean died;
+  boolean portal = false;
 
   Square() {
     s = 50;
@@ -55,8 +56,20 @@ class Square {
       collided = false;
     }
 
-    //Sends you back to the start if you touch spikes.
-    if (yPos > 700 || ((xPos > 520) && (xPos < 770) && (yPos > 400) && (yPos < 440))) {
+    //Sends you back to the start if you touch spikes, or teleports you if you're in stage 5.
+    if (stage5 && yPos > 700) {
+      yPos = 400;
+      xPos = 600;
+      speedy -= 20;
+      portal = true;
+    }
+    else if (stage5 && ((xPos > 520) && (xPos < 770) && (yPos > 400) && (yPos < 440))) {
+      yPos = 700;
+      xPos = 375;
+      speedy -= 20;
+      portal = true;
+    }
+    else if (yPos > 700 || ((xPos > 520) && (xPos < 770) && (yPos > 400) && (yPos < 440))) {
       returnToStart();
     }
 
@@ -68,8 +81,10 @@ class Square {
 
     //Checking for each platform.
     collision(usualB.p1);
-    collision(usualB.p2);
-    collision(usualB.p3);
+    if (stage5 == false) {
+      collision(usualB.p2);
+      collision(usualB.p3);
+    }
     collision(usualB.p4);
     collision(usualB.p5);
     collision(usualB.p6);
@@ -127,7 +142,7 @@ class Square {
       xPos = 100;
       yPos = 675;
     }
-    if (enemyS == true){
+    if (enemyS == true) {
       xPos = 1100;
       yPos = 675;
     }

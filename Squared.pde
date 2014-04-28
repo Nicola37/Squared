@@ -1,11 +1,7 @@
 /*
  Nicola Frachesen
  CAP 3032
- Final Project - Iteration 3
- 
- Gameplay movies have been added to the title sceen. Two new levels have been added.
- Music has been changed to be from the Free Music Archive, and is now more varied (pardon the large file size).
- Somewhat instructional dialogue has now been added.
+ Final Project
  */
 
 //Music taken from the Free Music Archive.
@@ -31,6 +27,7 @@ boolean stage1 = false;
 boolean stage2 = false;
 boolean stage3 = false;
 boolean stage4 = false;
+boolean stage5 = false;
 boolean ending = false;
 
 //Winning image, fading in,etc.
@@ -69,32 +66,37 @@ void keyReleased() {
 }
 
 void draw() {
-  //For testing purposes, you can skip to a certain stage if you uncomment this.
-  /*if (keyCode == '1') {
-   stage1 = true;
-   stage2 = stage3 = stage4 = false;
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '2') {
-   stage2 = true;
-   stage1 = stage3 = stage4 = false;
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '3') {
-   stage3 = true; 
-   stage1 = stage2 = stage4 = false;
-   mainSquare.returnToStart();
-   enemy.returnToStart();
-   }
-   else if (keyCode == '4') {
-   stage4 = true;
-   stage1 = stage2 = stage3 = false; 
-   mainSquare.returnToStart();
-   }
-   
-   if (mousePressed) {
-   saveFrame("movie####.png");
-   }*/
+  //For testing purposes, you can skip to a certain stage and take screenshots if you uncomment this.
+  if (keyCode == '1') {
+    stage1 = true;
+    stage2 = stage3 = stage4 = stage5 = false;
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '2') {
+    stage2 = true;
+    stage1 = stage3 = stage4 = stage5 = false;
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '3') {
+    stage3 = true; 
+    stage1 = stage2 = stage4 = stage5 = false;
+    mainSquare.returnToStart();
+    enemy.returnToStart();
+  }
+  else if (keyCode == '4') {
+    stage4 = true;
+    stage1 = stage2 = stage3 = stage5 = false; 
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '5') {
+    stage5 = true;
+    stage1 = stage2 = stage3 = stage4 = false; 
+    mainSquare.returnToStart();
+  }
+
+  if (mousePressed) {
+    saveFrame("movie####.png");
+  }
 
   if (mainMenu) {
     level.mainMenu();
@@ -110,6 +112,9 @@ void draw() {
   }
   else if (stage4) {
     level.stage4();
+  }
+  else if (stage5) {
+    level.stage5();
   }
   //A winner is you.
   else if (ending) {
