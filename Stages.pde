@@ -33,6 +33,7 @@ class Stages {
     if (keyCode == ENTER) {
       mainMenu = false;
       stage1 = true;
+      easter.a = false;
       music.playJam();
     }
   }
@@ -173,13 +174,13 @@ class Stages {
 
     if (flag1 == false && flag2 == false && flag3 == false) {
       if (fadeIn1 < 255) {
-        fadeIn1 += 1.1;
+        fadeIn1 ++;
       }
       if (fadeIn1 >= 255) {
-        fadeIn2 += 1.1;
+        fadeIn2 ++;
       }
       if (fadeIn1 >= 255 && fadeIn2 >= 255) {
-        fadeIn3 += 1.1;
+        fadeIn3 ++;
       }
       textSize(30);
       textAlign(CENTER);
@@ -221,7 +222,7 @@ class Stages {
       background(map(mainSquare.xPos, 200, 1200, 0, 250));
       fill(255);
       textSize(30);
-      text("So now it's time to make it out of here...", width/2, 750);
+      text("So now it's time to get out of here...", width/2, 750);
     }
 
     mainSquare.displayS();

@@ -47,6 +47,15 @@ class Audio {
     song.play();
     song.loop();
   }
+  
+  void playNyan() {
+    if (song != null) {
+      song.pause();
+    }
+    song = minim.loadFile("Nyan Cat.mp3");
+    song.play();
+    song.loop();
+  }
 
   void pause() {
     song.pause();

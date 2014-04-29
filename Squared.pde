@@ -17,6 +17,7 @@ Minim minim;
 Audio music = new Audio();
 Stages level = new Stages();
 TitleMovie gameplay = new TitleMovie();
+EggCheck easter = new EggCheck();
 
 //Movie Stuff
 Movie movie1, movie2, movie3, movie4, movie9000, movie9001;
@@ -43,6 +44,7 @@ boolean goodEnd = false;
 
 //Winning image, fading in,etc.
 PImage Win;
+PImage nyan;
 float fadeIn = 0;
 float fadeOut = 255;
 float rand = random(9100); //for added fun, set this to 9001
@@ -54,6 +56,7 @@ void setup() {
   minim = new Minim(this);
   music.playaaf();
   Win = loadImage("Win.jpg");
+  nyan = loadImage("nyan.png");
 
   imageMode(CENTER);
   movie1 = new Movie(this, "movie1.mov");
@@ -78,41 +81,41 @@ void keyReleased() {
 
 void draw() {
   //For testing purposes, you can skip to a certain stage and take screenshots if you uncomment this.
-  if (keyCode == '1') {
-    stage1 = true;
-    stage2 = stage3 = stage4 = stage5 = false;
-    mainSquare.returnToStart();
-  }
-  else if (keyCode == '2') {
-    stage2 = true;
-    stage1 = stage3 = stage4 = stage5 = false;
-    mainSquare.returnToStart();
-  }
-  else if (keyCode == '3') {
-    stage3 = true; 
-    stage1 = stage2 = stage4 = stage5 = false;
-    mainSquare.returnToStart();
-    enemy.returnToStart();
-  }
-  else if (keyCode == '4') {
-    stage4 = true;
-    stage1 = stage2 = stage3 = stage5 = false; 
-    mainSquare.returnToStart();
-  }
-  else if (keyCode == '5') {
-    stage5 = true;
-    stage1 = stage2 = stage3 = stage4 = false; 
-    mainSquare.returnToStart();
-  }
-  else if (keyCode == '0') {
-    finalStage = true;
-    stage1 = stage2 = stage3 = stage4 = stage5 = false; 
-    mainSquare.returnToStart();
-  }
-
-  if (mousePressed) {
-    saveFrame("movie####.png");
-  }
+  /*if (keyCode == '1') {
+   stage1 = true;
+   stage2 = stage3 = stage4 = stage5 = false;
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '2') {
+   stage2 = true;
+   stage1 = stage3 = stage4 = stage5 = false;
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '3') {
+   stage3 = true; 
+   stage1 = stage2 = stage4 = stage5 = false;
+   mainSquare.returnToStart();
+   enemy.returnToStart();
+   }
+   else if (keyCode == '4') {
+   stage4 = true;
+   stage1 = stage2 = stage3 = stage5 = false; 
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '5') {
+   stage5 = true;
+   stage1 = stage2 = stage3 = stage4 = false; 
+   mainSquare.returnToStart();
+   }
+   else if (keyCode == '0') {
+   finalStage = true;
+   stage1 = stage2 = stage3 = stage4 = stage5 = false; 
+   mainSquare.returnToStart();
+   }
+   
+   if (mousePressed) {
+   saveFrame("movie####.png");
+   }*/
 
   if (mainMenu) {
     level.mainMenu();
@@ -138,6 +141,9 @@ void draw() {
   //A winner is you.
   else if (ending) {
     level.ending();
+  }
+  if (!ending){
+    easter.check();
   }
 }
 
