@@ -2,7 +2,7 @@
  Nicola Frachesen
  CAP 3032
  Final Project
- */
+*/
 
 //Music taken from the Free Music Archive.
 import ddf.minim.*;
@@ -29,6 +29,7 @@ boolean stage2 = false;
 boolean stage3 = false;
 boolean stage4 = false;
 boolean stage5 = false;
+boolean stage6 = false;
 boolean finalStage = false;
 boolean ending = false;
 
@@ -41,14 +42,19 @@ boolean flag1 = false;
 boolean flag2 = false;
 boolean flag3 = false;
 boolean goodEnd = false;
+float v1 = 0;
+float v2 = 0;
+float v3 = 0;
 
 //Winning image, fading in,etc.
 PImage Win;
 PImage nyan;
+PImage evilnyan;
 float fadeIn = 0;
 float fadeOut = 255;
-float rand = random(9100); //for added fun, set this to 9001
+float rand = random(9037);
 float x;
+boolean switches = false;
 
 void setup() {
   size(1200, 900);
@@ -57,6 +63,7 @@ void setup() {
   music.playaaf();
   Win = loadImage("Win.jpg");
   nyan = loadImage("nyan.png");
+  evilnyan = loadImage("evilnyan.png");
 
   imageMode(CENTER);
   movie1 = new Movie(this, "movie1.mov");
@@ -80,42 +87,56 @@ void keyReleased() {
 }
 
 void draw() {
-  //For testing purposes, you can skip to a certain stage and take screenshots if you uncomment this.
+  //For testing purposes, you can skip to a certain stage, take screenshots, and see coordinates if you uncomment this.
+  //Can mess up user gameplay, please only use for testing.
   /*if (keyCode == '1') {
-   stage1 = true;
-   stage2 = stage3 = stage4 = stage5 = false;
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '2') {
-   stage2 = true;
-   stage1 = stage3 = stage4 = stage5 = false;
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '3') {
-   stage3 = true; 
-   stage1 = stage2 = stage4 = stage5 = false;
-   mainSquare.returnToStart();
-   enemy.returnToStart();
-   }
-   else if (keyCode == '4') {
-   stage4 = true;
-   stage1 = stage2 = stage3 = stage5 = false; 
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '5') {
-   stage5 = true;
-   stage1 = stage2 = stage3 = stage4 = false; 
-   mainSquare.returnToStart();
-   }
-   else if (keyCode == '0') {
-   finalStage = true;
-   stage1 = stage2 = stage3 = stage4 = stage5 = false; 
-   mainSquare.returnToStart();
-   }
-   
-   if (mousePressed) {
-   saveFrame("movie####.png");
-   }*/
+    stage1 = true;
+    stage2 = stage3 = stage4 = stage5 = stage6 = false;
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '2') {
+    stage2 = true;
+    stage1 = stage3 = stage4 = stage5 = stage6 = false;
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '3') {
+    stage3 = true; 
+    stage1 = stage2 = stage4 = stage5 = stage6 = false;
+    mainSquare.returnToStart();
+    enemy.returnToStart();
+  }
+  else if (keyCode == '4') {
+    stage4 = true;
+    stage1 = stage2 = stage3 = stage5 = stage6 = false; 
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '5') {
+    stage5 = true;
+    stage1 = stage2 = stage3 = stage4 = stage6 = false; 
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '6') {
+    stage6 = true;
+    stage1 = stage2 = stage3 = stage4 = stage5 = false; 
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == '0') {
+    finalStage = true;
+    stage1 = stage2 = stage3 = stage4 = stage5 = stage6 = false; 
+    mainSquare.returnToStart();
+  }
+  else if (keyCode == 'G') {
+    goodEnd = true;
+    ending = true;
+    stage1 = stage2 = stage3 = stage4 = stage5 = stage6 = false; 
+    mainSquare.returnToStart();
+  }
+
+  if (mousePressed) {
+    saveFrame("movie####.png");
+  }
+  
+  println(mouseX+","+mouseY);*/
 
   if (mainMenu) {
     level.mainMenu();
@@ -135,6 +156,9 @@ void draw() {
   else if (stage5) {
     level.stage5();
   }
+  else if (stage6) {
+    level.stage6();
+  }
   else if (finalStage) {
     level.finalStage();
   }
@@ -142,7 +166,7 @@ void draw() {
   else if (ending) {
     level.ending();
   }
-  if (!ending){
+  if (!ending && !finalStage) {
     easter.check();
   }
 }

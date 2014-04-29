@@ -25,10 +25,9 @@ class Stages {
       text("2", 800, 110);
     }
 
-    //Please pardon the long, not so pretty movie code.
-    //If for some reason things do not run, comment out the movie code.
-    //It's still being kind of odd when its power level is too high.
+    //For playing the movies.
     gameplay.playRandom();
+    noTint();
 
     if (keyCode == ENTER) {
       mainMenu = false;
@@ -109,7 +108,7 @@ class Stages {
     fill(0);
     textSize(15);
     text("Wow, even my mortal enemy is cliché.", 860, 820);
-    text("Well, at least he glows. That's kinda cool, I guess.", 810, 835);
+    text("Well, at least he glows. That's kinda cool, I guess.", 810, 837);
 
 
     if (mainSquare.goalReached()) {
@@ -162,8 +161,70 @@ class Stages {
 
     if (mainSquare.goalReached()) {
       stage5 = false;
+      stage6 = true;
+      mainSquare.returnToStart();
+    }
+  }
+
+  void stage6() {
+    background(237);
+    enemy.sColor = color(map(abs(sin(x)), 0, 1, 30, 230), 0, 0);
+    x+=0.02;
+    usualB.displayB();
+    mainSquare.displayS();
+    enemy.displayS();
+    if (mainSquare.xPos > (enemy.xPos - enemy.s) && mainSquare.xPos < (enemy.xPos + enemy.s) &&
+      mainSquare.yPos > (enemy.yPos - enemy.s) && mainSquare.yPos < (enemy.yPos + enemy.s)) {
+      mainSquare.returnToStart();
+      enemy.returnToStart();
+    }
+    if (mainSquare.died) {
+      enemy.returnToStart();
+    }
+
+    fill(map(abs(sin(x)), 0, 1, 30, 230), 0, 0);
+    rectMode(CORNER);
+    rect(79, 760, 90, 90);
+    fill(0);
+    textSize(30);
+    text("MWAHAHAHAHAHA!!", width/2-350, height/2+335);
+    text("THIS IS OUR FINAL SHOWDOWN!", width/2-350, height/2+375);
+    text("YOU'LL NEVER GET THROUGH NOW!", width/2-350, height/2+415);
+    fill(15);
+    rect(800, 700, 5, 500);
+    fill(0, 0, 200);
+    rect(970, 760, 30, 30);
+    fill(0);
+    textSize(15);
+    text("This guy isn't exactly the smartest, is he?", 845, 820);
+    text("I think if we can just stand on those switches", 820, 837);
+    text("at the same time...", 920, 854);
+
+
+    if (!switches) {
+      fill(200, 0, 0);
+      rect(102, 175, 40, 75);
+      ellipse(460, 400, 120, 10); 
+      ellipse(735, 400, 130, 10);
+    }
+    else {
+      fill(0, 200, 0);
+      ellipse(460, 400, 120, 10); 
+      ellipse(735, 400, 130, 10);
+    }
+    
+    if (((mainSquare.xPos > 375 && mainSquare.xPos < 545 && enemy.xPos > 645 && enemy.xPos < 825) ||
+        (enemy.xPos > 375 && enemy.xPos < 545 && mainSquare.xPos > 645 && mainSquare.xPos < 825))&&
+        mainSquare.yPos < 400 && mainSquare.yPos > 330 && enemy.yPos < 400 && enemy.yPos > 330){
+      switches = true;
+    }
+
+    if (mainSquare.goalReached() && switches) {
+      stage6 = false;
+      switches = false;
       finalStage = true;
       music.playSquareAndEnjoy();
+      enemy.returnToStart();
       mainSquare.xPos = 600;
       mainSquare.yPos = 675;
     }
@@ -174,13 +235,13 @@ class Stages {
 
     if (flag1 == false && flag2 == false && flag3 == false) {
       if (fadeIn1 < 255) {
-        fadeIn1 ++;
+        fadeIn1 += 0.9;
       }
       if (fadeIn1 >= 255) {
-        fadeIn2 ++;
+        fadeIn2 += 0.9;
       }
       if (fadeIn1 >= 255 && fadeIn2 >= 255) {
-        fadeIn3 ++;
+        fadeIn3 += 0.9;
       }
       textSize(30);
       textAlign(CENTER);
@@ -211,7 +272,7 @@ class Stages {
       textSize(25);
       text("Nope. I'm not doing this anymore, omnipotent narrator person.", width/2, 750);
       text("My whole life, I've just repeated this level over and over, and I'm tired of it.", width/2, 800);
-      text("I've always been screwed, or I guess you could say...", width/2, 850);
+      text("I've always been screwed, or I guess you could say I've been...", width/2, 850);
     }
     if (flag2 && !flag1 && !flag3) {
       fill(255);
@@ -268,6 +329,18 @@ class Stages {
     else if (goodEnd) {
       imageMode(CORNER);
       image(Win, 0, 0, Win.width*3, Win.height*2.5);
+
+      fill(0, 0, 200);
+      rect(50, 450+200*sin(v1), 50, 50);
+      fill(200, 0, 0);
+      rect(1150, 450+200*cos(v1), 50, 50);
+      fill(255*sin(v1), 255*cos(v2), 255*sin(v3));
+      rect(600, 50, 50, 50);
+      rect(200, 850, 50, 50);
+      rect(1000, 850, 50, 50);
+      v1+=0.028;
+      v2+=0.03;
+      v3+=0.04;
 
       textAlign(CENTER);
       fill(0);

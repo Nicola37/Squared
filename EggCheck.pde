@@ -8,6 +8,7 @@ class EggCheck {
     up2 = down1 = down2 = left1 = right1 = left2 = right2 = b = a = false;
   }
 
+  //Check to see if the user has entered the Konami Code 
   void check() {
     if (keyCode == UP && up1 == false) {
       up1 = true;
@@ -45,11 +46,14 @@ class EggCheck {
     }
 
     if (a == true) {
+      //Play the OVER 9000! video if on the main menu.
       if (mainMenu) {
         rand = 9001;
       }
+      //Activate nyan cat mode if in the main game.
       else {
         imageMode(CENTER);
+        //Flipping the image for facing left and right.
         if (keyCode == LEFT) {
           facingLeft = true;
           facingRight = false;
@@ -58,15 +62,23 @@ class EggCheck {
           facingRight = true;
           facingLeft = false;
         }
-
         if (facingLeft == true) {
           pushMatrix();
           scale(-1.0, 1.0);
-          image(nyan, -mainSquare.xPos, mainSquare.yPos+1, -100, 60);
+          image(nyan, -mainSquare.xPos, mainSquare.yPos+2, -100, 59);
           popMatrix();
+          if (stage3 || stage6) {
+            image(evilnyan, enemy.xPos, enemy.yPos+2, 100, 59);
+          }
         }
         else if (facingRight == true) {
-          image(nyan, mainSquare.xPos, mainSquare.yPos+1, 100, 60);
+          if (stage3 || stage6) {
+            pushMatrix();
+            scale(-1.0, 1.0);
+            image(evilnyan, -enemy.xPos, enemy.yPos+2, -100, 59);
+            popMatrix();
+          }
+          image(nyan, mainSquare.xPos, mainSquare.yPos+2, 100, 59);
         }
       }
     }
