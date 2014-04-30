@@ -7,7 +7,7 @@ class Square {
   float footy1 = yPos + s/2;
   float footx2 = xPos + s/2;
   float footy2 = yPos + s/2;
-  double speedx = 3.5;
+  double speedx = 3.7;
   double speedy = 0;
   boolean collided = false;
   boolean enemyS;

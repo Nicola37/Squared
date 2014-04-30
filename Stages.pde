@@ -59,7 +59,7 @@ class Stages {
   void stage2() {
     float redness = map(mainSquare.yPos, 0, 1200, 0, 255);
     float blueness = map(mainSquare.xPos, 0, 900, 0, 255)+50;
-    float greenness = map(mainSquare.xPos/mainSquare.yPos, 0, 1200, 0, 255)+20;
+    float greenness = map(mainSquare.xPos/mainSquare.yPos, 0, 900, 0, 255)+27;
     background(redness, greenness, blueness);
     Background stage2B = new Background(color(redness, greenness, blueness), color(15, 15, 15));
     stage2B.displayB();
