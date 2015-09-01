@@ -101,7 +101,7 @@ class TitleMovie {
         movie9001.stop();
         fadeOut = 255;
         rand = random(9037);
-        music.cont();
+        music.playaaf();
       }
     }
   }

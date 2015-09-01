@@ -48,7 +48,11 @@ class EggCheck {
     if (a == true) {
       //Play the OVER 9000! video if on the main menu.
       if (mainMenu) {
+        if (fadeOut < 255){
+          fadeOut = 255;
+        }
         rand = 9001;
+        up1 = up2 = down1 = down2 = left1 = right1 = left2 = right2 = b = a = false;
       }
       //Activate nyan cat mode if in the main game.
       else {
